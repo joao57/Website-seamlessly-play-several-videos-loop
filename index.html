@@ -1,3 +1,5 @@
+<!-- PARA O CÓDIGO FUNCINAR em qualquer TV com qualquer vídeo, apenas siga 3 passos, 
+    contidos nas linhas: 27, 64, 88 -->
 <!DOCTYPE html>
 <html>
 
@@ -6,7 +8,7 @@
 <div id="videoContainer" style="display:inline-block"></div>
 <br>
 <!-- 
-    CASO QUEIRA ADICIONAR ALGUM TEXTO
+    CASO QUEIRA ADICIONAR ALGUM TEXTO abaixo do vídeo, é aqui:
 
     <b id="output" style="color: white; vertical-align:top"></b> 
 -->
@@ -22,10 +24,11 @@ var videoContainer = document.getElementById('videoContainer'),
     ],
     vidSources =
     [
-        // AQUI DECLARA OS VÍDEOS 
+        // *****AQUI DECLARA OS VÍDEOS*****
+
         "./assets/video1.mp4",
         "./assets/video2.mp4",
-        // "./assets/video3.mp4",
+        "./assets/video3.mp4",
         "./assets/video4.mp4",
         "./assets/video5.mp4"
         // "http://www.w3schools.com/html/movie.mp4",
@@ -34,11 +37,11 @@ var videoContainer = document.getElementById('videoContainer'),
         // "http://www.w3schools.com/html/mov_bbb.mp4",
         // "http://www.w3schools.com/html/movie.mp4"
         
-        //this list could be additionally filled without any other changing from code
+        // essa lista você pode adicionar ou acrescentar vídeos SEM QUALQUER MUDANÇA NO CÓDIGO.
     ],
     nextActiveVideo = 0;
 
-videoObjects[0].inx = 0; //set index
+videoObjects[0].inx = 0; //setar o index
 videoObjects[1].inx = 1;
 
 initVideoElement(videoObjects[0]);
@@ -57,16 +60,15 @@ function initVideoElement(video)
     video.playsinline = true;
     video.muted = false;
     video.controls = true;
-    video.preload = 'auto'; //but do not set autoplay, because it deletes preload
+    video.preload = 'auto'; // não ligar autoplay, pois ele deleta o preload
+    // *****abaixo, LOCAL 1/2 ONDE DEVE SER ALTERA A RESOLUÇÃO PARA RESOLUÇÃO DA TV*****
     video.width = 1080;
     video.height = 600;
     
-    //loadedmetadata is wrong because if we use it then we get endless loop
+    //loadedmetadata não é correto pois se usar esse comando o resultado é um loop infinito
+
     video.onplaying = function(e)
     {
-        // output.innerHTML = 'Current video source index: ' + nextActiveVideo;
-
-        //select next index. If is equal vidSources.length then it is 0
         nextActiveVideo = ++nextActiveVideo;
 
         // fiz o console log abaixo para conferir a sequência das URLs
@@ -75,7 +77,7 @@ function initVideoElement(video)
         if(nextActiveVideo >= vidSources.length)
             nextActiveVideo = 0;
 
-        //replace the video elements against each other:
+        //subistitua os elementos do vídeo mais uma vez:
         if(this.inx == 0)
             nextVideo = videoObjects[1];
         else
@@ -83,6 +85,7 @@ function initVideoElement(video)
 
         nextVideo.src = vidSources[nextActiveVideo];
         nextVideo.controls;
+        // *****abaixo, LOCAL 2/2 ONDE DEVE SER ALTERA A RESOLUÇÃO PARA RESOLUÇÃO DA TV*****
         nextVideo.width = 1080;
         nextVideo.height = 600;
         nextVideo.pause();
@@ -96,7 +99,8 @@ function initVideoElement(video)
     };
 }
 
-
 </script>
 </body>
 </html>
+
+<!-- Qualquer dúvida, procurar o João Paulo Veiga da Friopecas TI Sistemas -->
