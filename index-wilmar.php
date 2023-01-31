@@ -1,10 +1,18 @@
 <?php
-$loja = $_GET['loja'];
+    // PEGA PARÂMETRO COM NOME DA LOJA
+    $loja = strtolower($_GET['loja']);
+    // MONTA DIRETORIO ONDE DEVERÃO CONTER OS VÍDEOS
+    $dir = ".//tv//".$loja."//";    
+    // LÊ ARQUIVOS DENTRO DA PASTA E REMOVE OS PONTOS
+    $listDiretorio = array_diff(
+        scandir($dir),
+        ['.', '..']
+    );
 ?>
 
 <!-- PARA O CÓDIGO FUNCINAR em qualquer TV com qualquer vídeo, apenas siga 3 passos, 
     contidos nas linhas: 32, 69, 93 -->
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -12,17 +20,19 @@ $loja = $_GET['loja'];
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>App TV Friopecas</title>
 
-<body bgcolor="black" align="center">
+<body  >
 
 <div id="videoContainer" style="display:inline-block"></div>
 <br>
 <!-- 
+    bgcolor="write" align="center"
     CASO QUEIRA ADICIONAR ALGUM TEXTO abaixo do vídeo, é aqui:
 
     <b id="output" style="color: white; vertical-align:top"></b> 
 -->
 
 <script>
+   
 var videoContainer = document.getElementById('videoContainer'),
     output = document.getElementById('output'),
     nextVideo,
@@ -31,13 +41,10 @@ var videoContainer = document.getElementById('videoContainer'),
         document.createElement('video'),
         document.createElement('video')
     ],
-    vidSources =
-    [
+    vidSources = "<?php echo $listDiretorio; ?>";
+    console.log(vidSources);
+    //[
         // *****AQUI DECLARA OS VÍDEOS*****
-
-        "./assets/1.mp4",  
-        "./assets/2.mp4",
-        "./assets/3.mp4",
         // "./assets/video4.mp4",
         // "./assets/video5.mp4"
         // "http://www.w3schools.com/html/movie.mp4",
@@ -47,7 +54,7 @@ var videoContainer = document.getElementById('videoContainer'),
         // "http://www.w3schools.com/html/movie.mp4"
         
         // essa lista você pode adicionar ou acrescentar vídeos SEM QUALQUER MUDANÇA NO CÓDIGO.
-    ],
+    //],
     nextActiveVideo = 0;
 
 videoObjects[0].inx = 0; //setar o index
