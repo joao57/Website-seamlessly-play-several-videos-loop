@@ -3,7 +3,7 @@
     $loja = strtolower($_GET['loja']);
     // MONTA DIRETORIO ONDE DEVERÃO CONTER OS VÍDEOS
     $dir = ".//tv//".$loja."//";    
-    // LÊ ARQUIVOS DENTRO DA PASTA E REMOVE OS PONTOS
+    // LÊ ARQUIVOS DENTRO DA PASTA E REMOVE OS PONTOS :
     $listDiretorio = array_diff(
         scandir($dir),
         ['.', '..']
